@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 #[Fillable(['name', 'description', 'owner_id'])]
 class TodoList extends Model
@@ -31,7 +32,15 @@ class TodoList extends Model
     public function members(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'list_user', 'list_id', 'user_id')
-                    ->withPivot('added_by')
-                    ->withTimestamps();
+            ->withPivot('added_by')
+            ->withTimestamps();
+    }
+
+    /**
+     * Get the tasks that belong to the list.
+     */
+    public function tasks(): HasMany
+    {
+        return $this->hasMany(Task::class, 'list_id');
     }
 }

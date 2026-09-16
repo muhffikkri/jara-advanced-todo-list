@@ -15,6 +15,8 @@
             </a>
             <div class="flex items-center gap-3 text-sm font-semibold">
                 @auth
+                    <a href="{{ route('lists.index') }}" class="rounded-lg px-3 py-2 text-slate-600 transition hover:bg-blue-50 hover:text-blue-800">Daftar</a>
+                    <a href="{{ route('lists.joined') }}" class="rounded-lg px-3 py-2 text-slate-600 transition hover:bg-blue-50 hover:text-blue-800">Diikuti</a>
                     <a href="{{ route('profile.edit') }}" class="rounded-lg px-3 py-2 text-slate-600 transition hover:bg-blue-50 hover:text-blue-800">{{ auth()->user()->name }}</a>
                     @if (auth()->user()->role === 'admin')
                         <a href="{{ route('admin.dashboard') }}" class="rounded-lg px-3 py-2 text-slate-600 transition hover:bg-blue-50 hover:text-blue-800">Admin</a>
