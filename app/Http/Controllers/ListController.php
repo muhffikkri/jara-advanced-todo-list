@@ -66,4 +66,26 @@ class ListController extends Controller
 
         return response()->json($list->refresh());
     }
+
+    /**
+     * Hapus daftar beserta tugas & anggota secara atomik (khusus owner).
+     */
+    public function destroy(TodoList $list): JsonResponse
+    {
+        Gate::authorize('delete', $list);
+
+        DB::transaction(function () use ($list): void {
+            if (Schema::hasTable('tasks')) {
+                DB::table('tasks')->where('list_id', $list->id)->delete();
+            }
+
+            if (Schema::hasTable('list_user')) {
+                DB::table('list_user')->where('list_id', $list->id)->delete();
+            }
+
+            $list->delete();
+        });
+
+        return response()->json(null, 204);
+    }
 }
