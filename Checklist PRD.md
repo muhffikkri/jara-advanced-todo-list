@@ -14,6 +14,9 @@ Checklist ini menelusuri tiap poin di `PRD.md` agar mudah dilacak. Centang `[x]`
 - [x] `Database-Schema.md` — tabel, kolom, tipe data, dan relasi lengkap.
 - [x] `Changelog.md`, `Checklist PRD.md`, `Commit.md`, `README.md`, `releases/`.
 - [x] Build Vite OK & test bawaan Laravel lulus.
+- [x] Unit test (`TaskPriority`, `ListProgress`, konfigurasi model User & TodoList).
+- [x] Integration/feature test (skema DB, `ListPolicy`, `StoreListRequest`, smoke test).
+- [x] E2E test via Playwright (`tests/e2e`) dengan web server `.env.playwright`.
 
 ## F1. Autentikasi & Akun Pengguna
 
