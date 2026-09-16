@@ -17,6 +17,10 @@ dan versi mengikuti [Semantic Versioning](https://semver.org/).
 - Pembagian tugas per fitur untuk 5 developer (lihat `PRD.md` §10).
 - Dokumentasi skema database: `Database-Schema.md` (tabel, kolom, tipe data, relasi;
   termasuk rencana tabel `lists`, `tasks`, `list_user`).
+- Kelas bantu `TaskPriority` (enum) dan `ListProgress` (support).
+- Pengujian terotomasi: unit test (enhancement class & konfigurasi model),
+  integration/feature test (skema DB, `ListPolicy`, `StoreListRequest`, smoke test),
+  dan E2E test Playwright (`tests/e2e`, config di root, `npm run test:e2e`).
 
 ### In Progress (fitur sesuai milestone)
 - F1 Kemampuan autentikasi & manajemen akun (role user/admin).
