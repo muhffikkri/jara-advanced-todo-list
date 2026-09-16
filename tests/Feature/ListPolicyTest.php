@@ -22,7 +22,7 @@ class ListPolicyTest extends TestCase
     {
         parent::setUp();
 
-        $this->policy = new ListPolicy();
+        $this->policy = new ListPolicy;
         $this->owner = User::factory()->create();
         $this->other = User::factory()->create();
     }
