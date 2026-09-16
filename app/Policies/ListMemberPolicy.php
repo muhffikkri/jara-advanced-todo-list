@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Models\TodoList;
 use App\Models\User;
 
 class ListMemberPolicy
@@ -9,8 +10,8 @@ class ListMemberPolicy
     /**
      * Determine whether the user can manage members of the list.
      */
-    public function manageMembers(User $user, \App\Models\TodoList $todoList): bool
+    public function manageMembers(User $user, TodoList $list): bool
     {
-        return $user->id === $todoList->owner_id;
+        return $user->id === $list->owner_id;
     }
 }

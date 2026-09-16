@@ -5,13 +5,13 @@ namespace Tests\Feature;
 use App\Models\Task;
 use App\Models\TodoList;
 use App\Models\User;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
 class TaskTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
     public function test_owner_can_create_a_task_in_a_list(): void
     {

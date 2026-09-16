@@ -9,7 +9,8 @@
             <p class="mt-6 max-w-xl text-lg leading-8 text-slate-600">JARA membantu kamu mengelola tugas pribadi dan kolaborasi tim dengan lebih rapi, fokus, dan terukur.</p>
             <div class="mt-8 flex flex-wrap gap-3">
                 @auth
-                    <a href="{{ route('profile.edit') }}" class="primary-button sm:w-auto">Buka profil</a>
+                    <a href="{{ route('lists.index') }}" class="primary-button sm:w-auto">Buka daftar saya</a>
+                    <a href="{{ route('profile.edit') }}" class="secondary-button sm:w-auto">Buka profil</a>
                 @else
                     <a href="{{ route('register') }}" class="primary-button sm:w-auto">Mulai sekarang</a>
                     <a href="{{ route('login') }}" class="secondary-button sm:w-auto">Saya sudah punya akun</a>

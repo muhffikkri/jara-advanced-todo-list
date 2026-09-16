@@ -8,11 +8,15 @@ use App\Models\User;
 class ListPolicy
 {
     /**
-     * Hanya pemilik yang boleh melihat daftar.
+     * Pemilik atau anggota boleh melihat daftar.
      */
     public function view(User $user, TodoList $list): bool
     {
-        return $list->owner_id === $user->id;
+        if ($list->owner_id === $user->id) {
+            return true;
+        }
+
+        return $list->members()->where('users.id', $user->id)->exists();
     }
 
     /**
