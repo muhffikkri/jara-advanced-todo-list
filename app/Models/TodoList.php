@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 #[Fillable(['name', 'description', 'owner_id'])]
 class TodoList extends Model
@@ -24,7 +25,13 @@ class TodoList extends Model
         return $this->belongsTo(User::class, 'owner_id');
     }
 
-    // Kontrak relasi lintas-dev (tanpa membuat tabel milik dev lain):
-    // Dev3: hasMany Task via list_id cascade.
-    // Dev4: belongsToMany User via list_user cascade.
+    /**
+     * Get the members of the list.
+     */
+    public function members(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'list_user', 'list_id', 'user_id')
+                    ->withPivot('added_by')
+                    ->withTimestamps();
+    }
 }
