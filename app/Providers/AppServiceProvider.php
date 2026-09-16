@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\TodoList;
+use App\Policies\ListMemberPolicy;
+use App\Policies\ListPolicy;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +23,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        \Illuminate\Support\Facades\Gate::policy(\App\Models\TodoList::class, \App\Policies\ListMemberPolicy::class);
+        Gate::policy(TodoList::class, ListPolicy::class);
+        Gate::define('manageMembers', [ListMemberPolicy::class, 'manageMembers']);
     }
 }
