@@ -24,4 +24,11 @@ class TodoListFactory extends Factory
             'description' => fake()->optional()->sentence(),
         ];
     }
+
+    public function forUser(User $user): static
+    {
+        return $this->state(fn (array $attributes): array => [
+            'owner_id' => $user->id,
+        ]);
+    }
 }
