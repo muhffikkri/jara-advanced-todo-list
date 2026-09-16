@@ -29,4 +29,22 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Get the lists owned by the user.
+     */
+    public function ownedLists(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(TodoList::class, 'owner_id');
+    }
+
+    /**
+     * Get the lists the user has joined as a member.
+     */
+    public function joinedLists(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(TodoList::class, 'list_user', 'user_id', 'list_id')
+                    ->withPivot('added_by')
+                    ->withTimestamps();
+    }
 }
