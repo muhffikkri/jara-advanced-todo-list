@@ -2,25 +2,23 @@
 
 namespace App\Models;
 
+use Database\Factories\TodoListFactory;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
+#[Fillable(['name', 'description', 'owner_id'])]
 class TodoList extends Model
 {
+    /** @use HasFactory<TodoListFactory> */
     use HasFactory;
 
     protected $table = 'lists';
 
-    protected $fillable = [
-        'name',
-        'description',
-        'owner_id',
-    ];
-
     /**
-     * Get the user that owns the list.
+     * Pemilik daftar.
      */
     public function owner(): BelongsTo
     {

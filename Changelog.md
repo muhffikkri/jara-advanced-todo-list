@@ -15,6 +15,8 @@ dan versi mengikuti [Semantic Versioning](https://semver.org/).
   `Commit.md`, dan `README.md`.
 - Folder `releases/` untuk catatan perilisan.
 - Pembagian tugas per fitur untuk 5 developer (lihat `PRD.md` §10).
+- Dokumentasi skema database: `Database-Schema.md` (tabel, kolom, tipe data, relasi;
+  termasuk rencana tabel `lists`, `tasks`, `list_user`).
 
 ### In Progress (fitur sesuai milestone)
 - F1 Kemampuan autentikasi & manajemen akun (role user/admin).

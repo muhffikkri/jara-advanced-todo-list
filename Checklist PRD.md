@@ -6,6 +6,15 @@ Checklist ini menelusuri tiap poin di `PRD.md` agar mudah dilacak. Centang `[x]`
 
 ---
 
+## F0. Fondasi & Dokumentasi
+
+- [x] Setup project Laravel 13 (PHP 8.5) + SQLite + dependensi.
+- [x] `PRD.md` — kebutuhan produk & pembagian tugas 5 developer.
+- [x] `Design.md` — arsitektur, skema, otorisasi, route.
+- [x] `Database-Schema.md` — tabel, kolom, tipe data, dan relasi lengkap.
+- [x] `Changelog.md`, `Checklist PRD.md`, `Commit.md`, `README.md`, `releases/`.
+- [x] Build Vite OK & test bawaan Laravel lulus.
+
 ## F1. Autentikasi & Akun Pengguna
 
 - [ ] Register akun baru (role `user`).
