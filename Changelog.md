@@ -17,6 +17,15 @@ dan versi mengikuti [Semantic Versioning](https://semver.org/).
 - Pembagian tugas per fitur untuk 5 developer (lihat `PRD.md` §10).
 - Dokumentasi skema database: `Database-Schema.md` (tabel, kolom, tipe data, relasi;
   termasuk rencana tabel `lists`, `tasks`, `list_user`).
+- Migrasi tabel fitur: `lists`, `tasks`, `list_user` dan kolom `role` pada `users`.
+
+### Changed
+- Nama aplikasi di-set menjadi `JARA` (`.env.example` `APP_NAME=JARA`).
+
+### Verified
+- App terbukti berjalan di localhost: `php artisan serve` → HTTP 200 di
+  `http://127.0.0.1:8000`, title halaman `JARA`, seluruh migrasi terapkan, dan
+  test bawaan lulus.
 
 ### In Progress (fitur sesuai milestone)
 - F1 Kemampuan autentikasi & manajemen akun (role user/admin).
