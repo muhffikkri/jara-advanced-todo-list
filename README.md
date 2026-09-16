@@ -1,36 +1,56 @@
 # JARA — Advanced Todo List
 
-Aplikasi web untuk mengelola tugas pribadi maupun tim. Pengguna dapat membuat,
-mengelompokkan, dan mengatur tugas ke dalam beberapa daftar (*list/project*),
-menetapkan prioritas dan tenggat waktu, menandai tugas selesai, berkolaborasi dengan
-anggota lain, memantau progres, dan dikelola oleh admin.
+JARA adalah aplikasi web *advanced todo list* untuk mengelola tugas pribadi maupun tim.
+Pengguna dapat membuat daftar (*list/project*), menetapkan prioritas dan tenggat waktu,
+menandai tugas selesai, berkolaborasi dengan anggota tim, serta memantau progres.
+Fitur dikelola berbasis peran (`user`/`admin`) dengan otorisasi per-fiturnya.
 
 ## Fitur
 
-- **F1 — Autentikasi & Akun:** register, login/logout, role `user`/`admin`, profil,
-  middleware admin, seeder akun contoh.
-- **F2 — Manajemen Daftar (List/Project):** CRUD daftar; pemilik otomatis; hapus
-  daftar beserta tugas & anggota secara **atomik** (`DB::transaction`); otorisasi
-  owner via `ListPolicy` (403 untuk yang lain).
-- **F3 — Manajemen Tugas:** buat/edit/hapus/toggle selesai; prioritas
-  (low/medium/high/urgent); tenggat waktu; validasi via Form Request; otorisasi
-  via `TaskPolicy`.
+- **F1 — Autentikasi & Akun:** register, login/logout, role `user`/`admin`, halaman
+  profil (edit/update), middleware admin, seeder akun contoh.
+- **F2 — Manajemen Daftar (List/Project):** CRUD daftar; pembuat otomatis menjadi
+  pemilik (`owner_id`); hapus daftar beserta tugas & anggota secara **atomik**
+  (`DB::transaction`); otorisasi owner via `ListPolicy` (403 untuk yang lain).
+- **F3 — Manajemen Tugas:** buat, edit, hapus, toggle selesai; prioritas
+  (`low`/`medium`/`high`/`urgent`); tenggat waktu; validasi via Form Request;
+  otorisasi via `TaskPolicy` (owner/member list).
 - **F4 — Kolaborasi & Keanggotaan:** pemilik menambah/menghapus anggota (pivot
-  `list_user`), daftar yang diikuti (`/lists/joined`), otorisasi `manageMembers`.
-- **F5 — Admin & Progres:** middleware admin (`/admin`); kalkulasi progres
-  `ListProgress`; pengelolaan akun & tampilan progres menyusul.
+  `list_user`), melihat daftar yang diikuti (`/lists/joined`), otorisasi
+  `manageMembers` (owner only).
+- **F5 — Admin & Progres:** area admin (`/admin`) khusus role admin; kalkulasi
+  progres `ListProgress` (tugas selesai / total × 100%).
 
-Dokumen lengkap: **[PRD.md](PRD.md)** · [Design.md](Design.md) · [Commit.md](Commit.md) ·
-[Checklist PRD.md](Checklist%20PRD.md) · [Changelog.md](Changelog.md) · `releases/`
+## Struktur Repo
 
-## Stack
+```
+app/
+  Http/Controllers/   # Auth, Profile, List, ListMember, Task
+  Http/Requests/      # Form Request validasi input (Store*/Update*)
+  Models/             # User, TodoList (lists), Task
+  Policies/           # ListPolicy, ListMemberPolicy, TaskPolicy
+  Providers/          # registrasi Gate/policy
+  Support/            # ListProgress (kalkulasi progres)
+database/
+  factories/          # UserFactory, TodoListFactory, TaskFactory
+  migrations/         # users, cache, jobs, lists, tasks, list_user
+  seeders/            # akun admin & user contoh
+resources/views/      # Blade: welcome, auth, profile, layouts
+routes/web.php        # seluruh endpoint aplikasi
+tests/
+  Unit/               # unit test (enum, support, konfigurasi model)
+  Feature/            # integration test (auth, list, task, member, policy)
+  e2e/                # E2E test (Playwright)
+```
+
+## Tech Stack
 
 - Laravel 13 (PHP 8.5)
 - Database MySQL (development & test, via `pdo_mysql`)
 - Blade + Tailwind CSS, Vite
 - PHPUnit (unit & feature test), Playwright (E2E), Laravel Pint
 
-## Memulai (Local Development)
+## Menjalankan (Local Development)
 
 ```sh
 # Prasyarat: PHP 8.5+, Composer 2.x, Node 20+, MySQL aktif
@@ -39,7 +59,6 @@ npm install
 cp .env.example .env          # Windows: copy .env.example .env
 php artisan key:generate
 php artisan migrate --seed
-npm run build                 # atau npm run dev / composer run dev
 php artisan serve
 ```
 
@@ -57,17 +76,17 @@ vendor/bin/pint --dirty               # format kode PHP
 npm run build                         # build aset frontend
 ```
 
-## Pembagian Tugas Tim (5 Developer)
+## Rilis
 
-| Dev | Fitur | Fokus |
-|-----|-------|-------|
-| Dev 1 | F1 Autentikasi & Akun | auth, role, profil, seeder |
-| Dev 2 | F2 Manajemen Daftar | CRUD list, owner, hapus atomik, list policy |
-| Dev 3 | F3 Manajemen Tugas | CRUD tugas, prioritas, tenggat, selesai |
-| Dev 4 | F4 Kolaborasi & Keanggotaan | pivot list_user, tambah/hapus anggota |
-| Dev 5 | F5 Admin & Progres | kelola akun by admin, monitor progres |
+- **v1.1.0** — kolaborasi anggota (F4), hapus daftar atomik (F2), test tugas.
+- **v1.0.0** — autentikasi (F1), CRUD list & tugas (F2–F3), suite test otomasi.
 
-Detail lengkap: **PRD.md §10**.
+Catatan lengkap per versi ada di folder `releases/` dan `Changelog.md`.
+
+## Dokumen Terkait
+
+[PRD.md](PRD.md) · [Design.md](Design.md) · [Database-Schema.md](Database-Schema.md) ·
+[Commit.md](Commit.md) · [Checklist PRD.md](Checklist%20PRD.md) · [Changelog.md](Changelog.md)
 
 ## Lisensi
 
