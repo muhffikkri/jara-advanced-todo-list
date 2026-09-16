@@ -11,6 +11,6 @@ class ApplicationSmokeTest extends TestCase
         $response = $this->get('/');
 
         $response->assertOk();
-        $response->assertSee("Let's get started", false);
+        $response->assertSee('Rencanakan. Kerjakan.', false);
     }
 }

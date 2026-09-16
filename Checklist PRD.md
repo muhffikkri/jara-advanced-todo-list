@@ -2,7 +2,7 @@
 
 Checklist ini menelusuri tiap poin di `PRD.md` agar mudah dilacak. Centang `[x]` saat selesai.
 
-**Status keseluruhan:** F0–F1 Selesai · F2–F3 Parsial · F4–F5 Belum
+**Status keseluruhan:** F0–F4 Selesai (fitur inti) · F5 Parsial
 
 ---
 
@@ -32,13 +32,13 @@ Checklist ini menelusuri tiap poin di `PRD.md` agar mudah dilacak. Centang `[x]`
 - [x] Membuat daftar baru → otomatis menjadi pemilik (`owner_id`).
 - [x] Melihat daftar milik & yang diikuti.
 - [x] Update nama/deskripsi daftar (khusus owner).
-- [ ] Hapus daftar (khusus owner).
-- [ ] Hapus daftar bersifat **atomik**: tugas + keanggotaan ikut terhapus; jikagagal, semua dibatalkan (rollback).
+- [x] Hapus daftar (khusus owner).
+- [x] Hapus daftar bersifat **atomik**: tugas + keanggotaan ikut terhapus; jikagagal, semua dibatalkan (rollback).
 - [x] Aksi bukan-owner **ditolak (403)**.
 - [x] Validasi input daftar.
-- [ ] Feature test: `owner_can_delete_list_atomically`.
-- [ ] Feature test: `deleting_list_removes_tasks_and_members`.
-- [ ] Feature test: `non_owner_cannot_delete_list` (403).
+- [x] Feature test: `owner_can_delete_list_atomically`.
+- [x] Feature test: `deleting_list_removes_tasks_and_members`.
+- [x] Feature test: `non_owner_cannot_delete_list` (403).
 
 ## F3. Manajemen Tugas
 
@@ -49,15 +49,15 @@ Checklist ini menelusuri tiap poin di `PRD.md` agar mudah dilacak. Centang `[x]`
 - [x] Menetapkan tenggat waktu (due_date).
 - [x] Menandai tugas selesai / batal selesai.
 - [x] Validasi input tugas.
-- [ ] Feature test CRUD tugas & validasi.
+- [x] Feature test CRUD tugas & validasi.
 
 ## F4. Kolaborasi & Keanggotaan
 
-- [ ] Pemilik dapat menambahkan pengguna lain ke daftar (pivot `list_user`).
-- [ ] Pemilik dapat menghapus keanggotaan anggota.
-- [ ] Anggota dapat melihat & mengerjakan tugas dalam daftar.
-- [ ] Non-member/owner-hanya diuji (403 untuk non-owner).
-- [ ] Feature test manajemen anggota.
+- [x] Pemilik dapat menambahkan pengguna lain ke daftar (pivot `list_user`).
+- [x] Pemilik dapat menghapus keanggotaan anggota.
+- [x] Anggota dapat melihat & mengerjakan tugas dalam daftar.
+- [x] Non-member/owner-hanya diuji (403 untuk non-owner).
+- [x] Feature test manajemen anggota.
 
 ## F5. Admin & Pemantauan Progres
 
@@ -70,12 +70,12 @@ Checklist ini menelusuri tiap poin di `PRD.md` agar mudah dilacak. Centang `[x]`
 
 ## NFR — Non-Fungsional (lintas fitur)
 
-- [ ] NFR-1: operasi hapus daftar dalam satu transaksi (`DB::transaction`).
+- [x] NFR-1: operasi hapus daftar dalam satu transaksi (`DB::transaction`).
 - [x] NFR-2: otorisasi via Policy → 403 untuk akses tidak sah.
 - [x] NFR-3: seluruh input melalui Form Request / validasi Laravel.
 - [x] NFR-4: semua query memakai Eloquent/parameterized (tanpa raw concatenation).
-- [x] NFR-5: Laravel 13 (PHP 8.5), SQLite development.
-- [ ] NFR-6: seluruh fitur utama memiliki feature test yang lulus.
+- [x] NFR-5: Laravel 13 (PHP 8.5), MySQL development.
+- [x] NFR-6: seluruh fitur utama memiliki feature test yang lulus.
 
 ## QA Akhir
 

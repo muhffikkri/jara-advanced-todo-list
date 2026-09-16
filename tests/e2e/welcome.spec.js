@@ -3,8 +3,8 @@ import { test, expect } from '@playwright/test';
 test('homepage loads in the browser', async ({ page }) => {
     await page.goto('/');
 
-    await expect(page).toHaveTitle('JARA');
-    await expect(page.getByRole('heading', { name: "Let's get started" })).toBeVisible();
+    await expect(page).toHaveTitle(/JARA/);
+    await expect(page.getByRole('heading', { name: 'Rencanakan. Kerjakan. Selesaikan.' })).toBeVisible();
 });
 
 test('unknown route returns a 404 page', async ({ page }) => {

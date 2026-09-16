@@ -5,6 +5,30 @@ Semua perubahan penting pada project ini dicatat di file ini.
 Format mengikuti [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 dan versi mengikuti [Semantic Versioning](https://semver.org/).
 
+## [1.1.0] - 2026-09-16
+
+### Added
+- **Hapus daftar atomik (F2):** endpoint `DELETE /lists/{list}` menghapus daftar
+  beserta tugas & anggota dalam satu transaksi (`DB::transaction`); otorisasi
+  via `ListPolicy::delete` (owner only).
+- **Kolaborasi & keanggotaan (F4):** relasi model (`TodoList::members()`,
+  `User::joinedLists()`), `ListMemberController` dengan endpoint tambah anggota
+  (`POST /lists/{list}/members`), hapus anggota
+  (`DELETE /lists/{list}/members/{member}`), dan daftar yang diikuti
+  (`GET /lists/joined`); otorisasi `manageMembers` (owner only).
+- **Pengujian tugas (F3):** feature test CRUD, validasi, dan otorisasi tugas.
+- **Perbaikan UI autentikasi (F1):** halaman login/register/profil dengan layout
+  bersama (`layouts/app`), homepage redesain, font Figtree.
+- Pengaktifan otorisasi di kontroler (`Controller::authorize` resolution).
+
+### Changed
+- Database test PHPUnit berpindah ke MySQL (`jara`) mengikuti lingkungan
+  tim; pengembangan juga memakai MySQL (`jara-todolist`).
+- Assertion smoke test & E2E disesuaikan dengan teks homepage baru.
+
+### In Progress (milestone berikutnya, sesuai PRD §9)
+- F5 Admin: tambah/hapus akun & tampilan progres per daftar.
+
 ## [1.0.0] - 2026-09-16
 
 ### Added

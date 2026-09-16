@@ -7,12 +7,18 @@ anggota lain, memantau progres, dan dikelola oleh admin.
 
 ## Fitur
 
-- **F1 — Autentikasi & Akun:** register, login/logout, role `user`/`admin`, profil.
+- **F1 — Autentikasi & Akun:** register, login/logout, role `user`/`admin`, profil,
+  middleware admin, seeder akun contoh.
 - **F2 — Manajemen Daftar (List/Project):** CRUD daftar; pemilik otomatis; hapus
-  daftar beserta tugas & anggota secara **atomik**; otorisasi owner (403 untuk yang lain).
-- **F3 — Manajemen Tugas:** prioritas (low/medium/high/urgent), tenggat waktu, status selesai.
-- **F4 — Kolaborasi & Keanggotaan:** tambah/hapus anggota oleh pemilik; kerja bersama tim.
-- **F5 — Admin & Progres:** admin tambah/hapus akun; pemantauan progres per daftar.
+  daftar beserta tugas & anggota secara **atomik** (`DB::transaction`); otorisasi
+  owner via `ListPolicy` (403 untuk yang lain).
+- **F3 — Manajemen Tugas:** buat/edit/hapus/toggle selesai; prioritas
+  (low/medium/high/urgent); tenggat waktu; validasi via Form Request; otorisasi
+  via `TaskPolicy`.
+- **F4 — Kolaborasi & Keanggotaan:** pemilik menambah/menghapus anggota (pivot
+  `list_user`), daftar yang diikuti (`/lists/joined`), otorisasi `manageMembers`.
+- **F5 — Admin & Progres:** middleware admin (`/admin`); kalkulasi progres
+  `ListProgress`; pengelolaan akun & tampilan progres menyusul.
 
 Dokumen lengkap: **[PRD.md](PRD.md)** · [Design.md](Design.md) · [Commit.md](Commit.md) ·
 [Checklist PRD.md](Checklist%20PRD.md) · [Changelog.md](Changelog.md) · `releases/`
@@ -20,14 +26,14 @@ Dokumen lengkap: **[PRD.md](PRD.md)** · [Design.md](Design.md) · [Commit.md](C
 ## Stack
 
 - Laravel 13 (PHP 8.5)
-- Database SQLite (development)
+- Database MySQL (development & test, via `pdo_mysql`)
 - Blade + Tailwind CSS, Vite
-- PHPUnit, Laravel Pint
+- PHPUnit (unit & feature test), Playwright (E2E), Laravel Pint
 
 ## Memulai (Local Development)
 
 ```sh
-# Prasyarat: PHP 8.5+, Composer 2.x, Node 20+
+# Prasyarat: PHP 8.5+, Composer 2.x, Node 20+, MySQL aktif
 composer install
 npm install
 cp .env.example .env          # Windows: copy .env.example .env
@@ -44,9 +50,11 @@ Akun default (seeder): lihat `database/seeders/DatabaseSeeder.php`.
 ## Testing & Kode Bersih
 
 ```sh
-php artisan test              # jalankan seluruh feature test
-vendor/bin/pint --dirty       # format kode PHP
-npm run build                 # build aset frontend
+php artisan test                      # unit + feature test (via PHPUnit)
+npm run test:e2e                      # E2E test (Playwright + Chromium)
+npx playwright install chromium       # sekali saja: unduh browser E2E
+vendor/bin/pint --dirty               # format kode PHP
+npm run build                         # build aset frontend
 ```
 
 ## Pembagian Tugas Tim (5 Developer)
