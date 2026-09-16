@@ -13,4 +13,5 @@ Route::middleware('auth')->group(function () {
     Route::post('/lists', [ListController::class, 'store']);
     Route::get('/lists/{list}', [ListController::class, 'show']);
     Route::patch('/lists/{list}', [ListController::class, 'update']);
+    Route::delete('/lists/{list}', [ListController::class, 'destroy']);
 });
