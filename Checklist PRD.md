@@ -62,11 +62,11 @@ Checklist ini menelusuri tiap poin di `PRD.md` agar mudah dilacak. Centang `[x]`
 ## F5. Admin & Pemantauan Progres
 
 - [x] Middleware/policy admin hanya untuk role `admin`.
-- [ ] Admin dapat menambahkan akun pengguna.
-- [ ] Admin dapat menghapus akun pengguna.
+- [x] Admin dapat menambahkan akun pengguna.
+- [x] Admin dapat menghapus akun pengguna.
 - [x] Perhitungan progres = tugas selesai / total × 100%.
 - [ ] Tampilan progres per daftar.
-- [ ] Feature test admin tambah/hapus akun.
+- [x] Feature test admin tambah/hapus akun.
 
 ## NFR — Non-Fungsional (lintas fitur)
 

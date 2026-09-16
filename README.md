@@ -78,6 +78,8 @@ npm run build                         # build aset frontend
 
 ## Rilis
 
+- **v1.2.0** — admin kelola akun pengguna (F5 parsial), UI Blade untuk
+  list/member/admin, named routes.
 - **v1.1.0** — kolaborasi anggota (F4), hapus daftar atomik (F2), test tugas.
 - **v1.0.0** — autentikasi (F1), CRUD list & tugas (F2–F3), suite test otomasi.
 

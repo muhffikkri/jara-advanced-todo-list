@@ -5,6 +5,34 @@ Semua perubahan penting pada project ini dicatat di file ini.
 Format mengikuti [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 dan versi mengikuti [Semantic Versioning](https://semver.org/).
 
+## [1.2.0] - 2026-09-16
+
+### Added
+- **Manajemen akun di area admin (F5 parsial):** `AdminController` dengan
+  dashboard daftar akun (`GET /admin`, paginate), tambah akun
+  (`POST /admin/users` — nama, email, password, role), dan hapus akun
+  (`DELETE /admin/users/{user}`); admin tidak dapat menghapus akun sendiri (403);
+  khusus role `admin`.
+- **UI Blade:** halaman `lists/index`, `lists/joined`, `lists/show`,
+  `lists/members`, dan `admin/index`; menu area admin pada layout.
+- **Named routes:** seluruh route web diberi nama (`lists.*`,
+  `lists.members.*`, `tasks.*`, `admin.*`, dsb.); parameter `/lists/{list}`
+  dibatasi `whereNumber`; `GET /lists/joined` diprioritaskan di atas
+  `/lists/{list}`.
+- **Relasi & otorisasi baru:** `TodoList::tasks`, `Task::list`;
+  `ListPolicy::view` kini mengizinkan member melihat daftar.
+- **Feature test admin:** `AdminUserTest` (tambah & hapus akun oleh admin).
+
+### Changed
+- `ListController` & `ListMemberController` menjawab dengan JSON atau Blade
+  (dual response via `expectsJson`).
+- Update profil kini dilayani `PUT/PATCH /profile`; user terautentikasi di
+  halaman utama dialihkan ke `/lists`.
+- `phpunit.xml` memakai SQLite `:memory:`; `TaskTest` memakai `RefreshDatabase`.
+
+### In Progress (milestone berikutnya, sesuai PRD §9)
+- F5 Admin: tampilan progres per daftar.
+
 ## [1.1.0] - 2026-09-16
 
 ### Added
